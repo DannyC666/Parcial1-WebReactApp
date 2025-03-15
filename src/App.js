@@ -5,20 +5,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import{Home} from "../src/pages/Home"
 import {FormPage} from "../src/pages/FormPage"
 import {Detail} from "../src/pages/Detail"
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
+
+
 function App() {
   return (
-    // d-flex justify-content-center align-items-center vh-100
     <div className="">
-      <BrowserRouter>
-       <Routes>
-         <Route path="/" element={<Home />} />
-         <Route path="/login" element={<FormPage />} />
-         <Route path="/menu" element={<Detail />} />
-         
-       </Routes>
-     </BrowserRouter>
-   
+        
+        <BrowserRouter>
+        <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<FormPage />} />
+          <Route
+            path="/detail"
+            element={
+              <Detail navbarTitle="Default Title" navbarImage="./assets/defaultIcon.svg" />
+            }
+          />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+
+
+  
     </div>
   );
 }

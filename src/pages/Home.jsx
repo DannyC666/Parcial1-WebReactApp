@@ -1,52 +1,51 @@
-import { Card, Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import {} from "../components/InputCard"
-import { useLocation } from "react-router-dom";
-import {CardDetail} from "../components/CardDetail/"
-import styles from "./FormPage.css"
 import {HomeBtn} from "../components/HomeBtn/HomeBtn"
-
-
+import styles from "./pageStyles/home.css"
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
-  const location = useLocation();
-  console.log("Datos recibidos:", location.state);
+  const navigate = useNavigate();
 
-    return (
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <Container className="menu-container d-flex justify-content-center align-items-center">
-        <Row className="text-center w-100" >
-          <Col xs={4} className="menu-item">
-            <HomeBtn buttonTitle={"menu"} route={"/menu"}  imageRoute={"https://cdn.icon-icons.com/icons2/3871/PNG/512/menu_icon_244496.png"}/>
-          </Col>
-          <Col xs={4} className="menu-item">
-            <HomeBtn buttonTitle={"stores"} route={"/stores"} imageRoute={"https://png.pngtree.com/png-clipart/20191120/original/pngtree-store-icon-in-line-style-png-image_5053711.jpg"}/>
-            
-          </Col>
-          <Col xs={4} className="menu-item">
-            <HomeBtn buttonTitle={"cart"} route={"/cart"} imageRoute={"https://static.vecteezy.com/system/resources/previews/019/787/018/original/shopping-cart-icon-shopping-basket-on-transparent-background-free-png.png"}/>
-          </Col>
+  const goToDetail = (title, image) => {
+    navigate("/detail", { state: { navbarTitle: title, navbarImage: image } });
+    console.log(title)
+  };
 
+  return (
+    <div 
+      className="d-flex justify-content-center align-items-center vh-100 buttons-home-card"
+      style={{
+        backgroundImage: "url('https://th.bing.com/th/id/R.b44ebd204a04b2da18e1a5b5dbb96b72?rik=yRGLPcDuxmVI%2bQ&pid=ImgRaw&r=0')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "103%",
+        height: "100vh",
+        marginLeft: "-15px",
+        padding: "0",
+      }}
+    >
+      <Container className="menu-container d-flex justify-content-center align-items-center">
+        <Row className="text-center w-100">
+
+
+          <Col xs={4} className="menu-item">
+            <HomeBtn onClick={() => goToDetail("MENU", "./assets/menuFoodIcon.svg")} buttonTitle={"MENU"}  imageRoute={"./assets/menuFoodIcon.svg"}/>
+          </Col>
+          <Col xs={4} className="menu-item">
+            <HomeBtn onClick={() => goToDetail("STORES", "./assets/storeIcon.svg")} buttonTitle={"STORES"}  imageRoute={"./assets/storeIcon.svg"}/>
+          </Col>
+          <Col onClick={() => goToDetail("CART", "./assets/shoppingCart.svg")} xs={4} className="menu-item">
+            <HomeBtn buttonTitle={"CART"} imageRoute={"./assets/shoppingCart.svg"}/>
+          </Col>
 
         </Row>
-          
-         
-        
-        </Container> 
-        
-         
+      </Container>
+    </div>
+  );
+}
 
-
-{/* 
-        <CardDetail> 
-
-
-        </CardDetail> */}
-        
-        
-      </div>
-      
-    );
-  }
   
   export default Home;
 

@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Too Good To Go - Parcial 1: Danny Muñoz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripcion
+Se desarrolla una aplicación web desarrollada con React con el objetivo de  ofrecer una solución para reducir el desperdicio de alimentos. La aplicación permite tiene varias vistas: explorar menús, tiendas.
 
-## Available Scripts
+## Tecnologías Utilizadas
 
-In the project directory, you can run:
+* React: Librería principal para la creación de la interfaz de usuario.
 
-### `npm start`
+* React Router: Para la navegación entre las diferentes páginas de la aplicación.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* React Bootstrap: Para el diseño y la estructura visual con componentes reutilizables.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* CSS: Para los estilos personalizados de cada página.
 
-### `npm test`
+## Configuración del Proyecto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clonar 
+```
+git clone https://github.com/DannyC666/Parcial1-WebReactApp.git
+cd Parcial1-WebReactApp
+```
+2. Instalar Dependencias
+```
+  npm install
+```
+3. Ejecutar el Proyecto
+```
+  npm start
+```
 
-### `npm run build`
+Esto iniciará el servidor de desarrollo en http://localhost:3000/.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Estructura del Proyecto
+```
+/src
+  /components
+    /CardDetail.jsx
+    /CarouselImages.jsx
+    /HomeBtn.jsx
+    /InputCard.jsx
+  /pages
+    /Detail.jsx
+    /FormPage.jsx
+    /Home.jsx
+  /pages/pageStyles
+    /Detail.css
+    /FormPage.css
+    /Home.css
+  App.js
+  index.js
+```
+### ` /src/components `
+Esta carpeta contiene componentes reutilizables, es decir, elementos que pueden ser usados en varias partes de la web sin estar ligados a una página específica. En general, estos componentes se usan repetitivamente dentro de cada una de las pagina de la aplicacion.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. `CardDetail.jsx:`  Tarjeta de comida que se usa en varias secciones de detalle.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. `HomeBtn.jsx:` Botón que se usa en la pantalla principal para redirigir a otras secciones. Se instancia para redirigir a la pagina Menu, Stores, Cart.
 
-### `npm run eject`
+3. `CarouselImages.jsx:`  Carrusel de imágenes que puede mostrarse en diferentes páginas de Detail.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. `InputCard.jsx:` Formulario de inicio de sesión que incluye validaciones para los campos de entrada.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `/src/pages`
+Aquí están las vistas principales de la aplicación, cada una representando una pantalla completa en la navegación.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. ` Home.jsx`:  Página principal, que contiene la navegacion para cambiar de pagina a Detail segun la opcion que se escoja.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. ` Detail.jsx`:  Página con detalles de los menús. Es la unica pagina cargada dinamicamente, ya que carga al tiempo a Menu, Stores y a Cart. Por ultimom obtiene datos desde una API usando fetch.
 
-## Learn More
+3. ` FormPage.jsx` : Página de inicio de sesión.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Enrutamiento en `App.js`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Se implementa BrowserRouter de React Router para gestionar la navegación:
+``` 
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Navigate to="/login" />}/>
+    <Route path="/login" element={<FormPage />} />
+    <Route path="/detail" element={<Detail navbarTitle="Default Title" navbarImage="./assets/defaultIcon.svg" />} />
+    <Route path="/home" element={<Home />} />
+  </Routes>
+</BrowserRouter>
+```
+### Mapeo de Rutas
 
-### Code Splitting
+* `/` → Redirige automáticamente a la página de inicio de sesión (/login).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* `/login` → Muestra el formulario de inicio de sesión (FormPage).
 
-### Analyzing the Bundle Size
+* `/detail` → Página de detalle de alimentos con imágenes en carrusel y tarjetas (Detail).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* `/home` → Página principal con botones de navegación (Home).
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Api usadas
+Las dos API utilizadas en el código sirven para obtener datos dinámicos en la pagina `detail.jsx`.
 
-### Advanced Configuration
+1. API de alimentos `food.json`: Esta API contiene la informacion asociada a un alimento de la app. En este caso, contiene el nombre del producto y la imagen asociada. Esta API se usa sobre  el componente `CardDetail.jsx` y se renderiza sobre la pagina `Detail.jsx`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+2. API del carrusel `carouselMock.json`: Se creo una seguna API que solo contenga las imagenes que se van a ver en el carrousel para la pagina `Detail.jsx`. Este JSON solo contiene un campo que corresponde a imagenes y nada mas.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+> ⚠ **Nota:** Las imagenes de las API son imagenes aleatorias generadas por Mockaroo. Por esta razon, al renderizar la pagina, solo aparecen imagenes de colores y no imagenes de productos reales.
 
-### `npm run build` fails to minify
+## Internacionalizacion `src/locales/es.json`
+Solo se decidio intenazionalizar el login de la pagina, ya que es el unico lugar de la aplicacion donde hay labels y textos estaticos. Los botones de la pagina home.jsx, tambien pueden ser internacionalizados. Sin embargo, no se decidio internacionalizar, ya que es un componente que tambien cambia su texto por los props que se le pasan.
+### Formulario internacionalizado
+```
+<Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Control type="email" placeholder={intl.formatMessage({ id: "login" })} />
+</Form.Group>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<Form.Control type="password" placeholder={intl.formatMessage({ id: "password" })} onChange={handlePasswordChange} value={formValues.password} />{!validationStates.passwordState && <Form.Text className="text-password-warning">Ingrese una contrasena entre 5 y 8 caraceteres </Form.Text>}
+```
+### Textos internacionalizados
+```
+<Card.Subtitle className="m-2 text-brand-food">
+        <FormattedMessage id="welcome"/>
+</Card.Subtitle>
+```
+
+## Decisiones y Proceso de Desarrollo
+
+1. **Uso de React Router:** Se decidió utilizar react-router-dom para manejar la navegación de la aplicación sin necesidad de recargar la página.
+
+2. **Estructura Modular:** Se separaron los componentes en la carpeta components y las páginas en pages para una mejor organización.
+
+3. **Uso de Bootstrap:** Se utilizó React Bootstrap para acelerar el desarrollo y proporcionar un diseño atractivo y responsivo.
+
+4. **Uso de APIs:** Se optó por utilizar datos dinámicos obtenidos desde JSON externos para la carga del carrusel y las tarjetas de comida.
+
+5. **Gestión del Estado:** Se usaron useState() y useEffect() para manejar la obtención y actualización de datos de la API.
+
+6. **Validación en Formularios:** Se implementó una validación básica en la contraseña del formulario de inicio de sesión.
+

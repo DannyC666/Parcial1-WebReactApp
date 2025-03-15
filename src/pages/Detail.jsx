@@ -1,9 +1,14 @@
 import {CardDetail} from "../components/CardDetail";
 import {CarouselImages} from "../components/CarouselImages/CarouselImages"
-
+import styles from "./pageStyles/Detail.css"
+import { useLocation } from "react-router-dom";
 const { useEffect, useState } = require("react");
 
-export function Detail() {
+
+
+export function Detail({ navbarTitle, navbarImage }) {
+    const location = useLocation();
+    const navData = location.state || {};
 
     const [food, setFood] = useState([]);
     useEffect(()=>{
@@ -12,8 +17,7 @@ export function Detail() {
           setFood(data);
         })
     }, []);
-    // console.log(food)
-
+    
     const [imageCarousel, setImageCarousel] = useState([]);
     useEffect(()=>{
         const URL = "https://gist.githubusercontent.com/DannyC666/f4359903776fbac44dde763b2beda30f/raw/9d838a5607c85c34503d70e5e9cb45dea85b0f61/carouselMock.json";
@@ -21,22 +25,22 @@ export function Detail() {
           setImageCarousel(data);
         })
     }, []);
-    console.log(imageCarousel)
-
-
-
+    
     return (
 
       <div>
-        <nav className="navbar sticky-top bg-body-tertiary ">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#"> Menu</a>
+        <nav className="navbar sticky-top navbar-styles">
+          <div className="container-fluid d-flex justify-content-between align-items-center">
+            
+            <img src={navData.navbarImage || navbarImage} alt="Navbar Icon" className="navbar-icon"/>
+            <a className="navbar-title" href="/home">{navData.navbarTitle || navbarTitle}</a>
+           <img src={navData.navbarImage || navbarImage} alt="Navbar Icon" className="navbar-icon" />
+
           </div>
-        </nav>  
+        </nav>
 
         <div>
           <CarouselImages items={imageCarousel}/>
-
         </div>
 
         <div className="d-flex flex-wrap gap-3 justify-content-center">

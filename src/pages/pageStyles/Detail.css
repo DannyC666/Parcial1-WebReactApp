@@ -1,0 +1,16 @@
+.navbar-styles {
+    background-color: #0a6368;  
+    padding: 10px 0;
+  }
+  
+  .navbar-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .menu-icon {
+    width: 40px;  
+    height: auto;
+  }
+  

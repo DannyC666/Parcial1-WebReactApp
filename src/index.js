@@ -6,14 +6,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { IntlProvider } from 'react-intl';
+import localeEsMessages from "./locales/es";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
  <React.StrictMode>
-   <Container>
+  
+   <Container style={{ maxWidth: "100%" , width:"100%"}}>
      <Row xs={1}>
        <Col>
-        <App />
+       <IntlProvider locale="es-ES" messages= {localeEsMessages}>
+          <App />
+
+       </IntlProvider>
+       
        </Col>
      </Row>
    </Container>

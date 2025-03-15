@@ -1,0 +1,55 @@
+.left-section {
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.right-section {
+    background-color: #153d2e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  
+.container{
+    max-width: 100% !important;
+
+}
+
+.left-container-section{
+  background-color: rgba(245, 222, 179, 0.233);
+}
+
+.title-brand-food {
+
+  font-size: 24px; 
+  font-weight: bold;
+  color: #1e2f2f; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.text-brand-food {
+  font-size: 16px;
+  font-weight: bold;
+  color: #8b4e32; 
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.img-brand-login{
+  border-radius: 240px 240px 0 0;
+  width: 90%;
+}
+
+.food-vector-image {
+
+  max-width: 15%; 
+  height: auto; 
+  display: block; 
+  margin: 0 auto;
+  margin-top: 20px;
+}
